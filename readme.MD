@@ -1,4 +1,6 @@
-```brew uninstall docker
+```
+curl -O https://concourse-ci.org/docker-compose.yml
+brew uninstall docker
 docker-compose up -d
 mv ~/Downloads/fly /usr/local/bin
 chmod +x /usr/local/bin/fly
