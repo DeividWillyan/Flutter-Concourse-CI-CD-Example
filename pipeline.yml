@@ -1,0 +1,30 @@
+resources:
+- name: source
+  type: git
+  source:
+    uri: https://github.com/DeividWillyan/Flutter-TDD_Clean-Architecture_Design-Patterns_SOLID.git
+    branch: master
+
+- name: docker
+  type: docker-image
+  source:
+    repository: cirrusci/flutter
+
+jobs:
+  - name: test
+    plan:
+      - in_parallel:
+        - get: docker
+        - get: source
+      - task: run-flutter-tests
+        config:
+          platform: linux
+          run:
+            path: sh
+            args:
+            - -ce
+            - |
+                cd source && flutter test 
+          inputs:
+            - name: source
+        image: docker
